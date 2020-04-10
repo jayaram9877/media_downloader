@@ -90,6 +90,7 @@ void resetData(){
             heroTag: null,
             onPressed: (){
               setState(() {
+                loading=true;
                 resetData();
                 getInstaLinks();
               });
@@ -106,32 +107,42 @@ void resetData(){
 
 
 
-    if(instaData.data!=null&&!loading ){
-      if(instaData.data[0].toString()=='error'){
-        return Center(child:Text('Please Check the url and try again '));
+    if(instaData.data!=null ){
+      if(instaData.data[0].toString()=='error' ){
+        return Center(
+          child: Text(
+              'Please copy the correct url and press refresh',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 17.0,
+                fontWeight:
+                FontWeight.bold,
+            ),
+          ),
+        );
+      }
+      if(loading){
+        return  Center(child: SizedBox(
+          width: 200.0,
+          height: 100.0,
+          child: Shimmer.fromColors(
+            baseColor: Colors.white10,
+            highlightColor: Colors.white,
+            child: Text(
+              'Loading',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight:
+                FontWeight.bold,
+              ),
+            ),
+          ),
+        )
+        );
       }
             return CustomScrollView(slivers: <Widget>[
-              SliverSafeArea(
-                  sliver:SliverToBoxAdapter(
-                    child: FacebookNativeAd(
-                      placementId: "554511951874232_554573681868059",
-                      adType: NativeAdType.NATIVE_BANNER_AD,
-                      width: double.infinity,
-                      height: 300,
-                      backgroundColor: Colors.blue,
-                      titleColor: Colors.white,
-                      descriptionColor: Colors.white,
-                      buttonColor: Colors.deepPurple,
-                      buttonTitleColor: Colors.white,
-                      buttonBorderColor: Colors.white,
-                      listener: (result, value) {
-                        print("Native Ad: $result --> $value");
-                      },
-                    ),
-                  )
-              ),
               ImageWidget(),
-              VideoWidget(),
               SliverSafeArea(
                   sliver:SliverToBoxAdapter(
                     child: FacebookNativeAd(
@@ -151,6 +162,8 @@ void resetData(){
                     ),
                   )
               ),
+              VideoWidget(),
+
 
             ],
             );
@@ -461,7 +474,14 @@ Future<List> getInstaLinks() async {
   String url= await getClipBoardData().then((data){
     return data ;
   });
-  http.Response response = await client.get(url);
+  http.Response response;
+  try{
+    response = await client.get(url);
+  }
+  catch (e){
+    return ['error'];
+
+  }
   var document = parse(response.body).outerHtml.toString();
   const start = '<script type="text/javascript">window._sharedData = ';
   const end = ";</script>";
@@ -523,6 +543,8 @@ Future<List> getInstaLinks() async {
   }
   catch (e){
     print('error man ${e.toString()}');
+    return ['error'];
+
   }
 
 for(var i in imgList){

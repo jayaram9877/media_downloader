@@ -93,6 +93,25 @@ builder: (context, Vdata){
            if(Vdata.data!=null){
              return CustomScrollView(
                slivers: <Widget>[
+                 SliverSafeArea(
+                     sliver:SliverToBoxAdapter(
+                       child: FacebookNativeAd(
+                         placementId: "554511951874232_554573681868059",
+                         adType: NativeAdType.NATIVE_BANNER_AD,
+                         width: double.infinity,
+                         height: 300,
+                         backgroundColor: Colors.blue,
+                         titleColor: Colors.white,
+                         descriptionColor: Colors.white,
+                         buttonColor: Colors.deepPurple,
+                         buttonTitleColor: Colors.white,
+                         buttonBorderColor: Colors.white,
+                         listener: (result, value) {
+                           print("Native Ad: $result --> $value");
+                         },
+                       ),
+                     )
+                 ),
                  WAImageWidget(imgList: imgList),
                  SliverSafeArea(
                      sliver:SliverToBoxAdapter(
