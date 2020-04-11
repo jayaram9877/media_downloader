@@ -51,7 +51,6 @@ class _InstaState extends State<Insta> with AutomaticKeepAliveClientMixin<Insta>
 void resetData(){
   imgList.clear();
   videoList.clear();
-  finalList.clear();
   thumbnailList.clear();
   downloadList.clear();
   imgDownloadBar.clear();
@@ -142,6 +141,25 @@ void resetData(){
         );
       }
             return CustomScrollView(slivers: <Widget>[
+              SliverSafeArea(
+                  sliver:SliverToBoxAdapter(
+                    child: FacebookNativeAd(
+                      placementId: "554511951874232_554573681868059",
+                      adType: NativeAdType.NATIVE_BANNER_AD,
+                      width: double.infinity,
+                      height: 300,
+                      backgroundColor: Colors.blue,
+                      titleColor: Colors.white,
+                      descriptionColor: Colors.white,
+                      buttonColor: Colors.deepPurple,
+                      buttonTitleColor: Colors.white,
+                      buttonBorderColor: Colors.white,
+                      listener: (result, value) {
+                        print("Native Ad: $result --> $value");
+                      },
+                    ),
+                  )
+              ),
               ImageWidget(),
               SliverSafeArea(
                   sliver:SliverToBoxAdapter(
@@ -439,7 +457,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                                 ),
                               )
                             ],),
-                            vidDownloadBar[index]==0?FaIcon(FontAwesomeIcons.video,size: 60,color: Colors.pink,):
+                            vidDownloadBar[index]==0?FaIcon(FontAwesomeIcons.play,size: 60,color: Colors.pink,):
                             vidDownloadBar[index]>0&&vidDownloadBar[index]<1?CircularPercentIndicator(
                               radius: 100,
                               lineWidth: 5.0,

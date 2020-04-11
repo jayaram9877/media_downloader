@@ -1,3 +1,4 @@
+import 'package:mediadownloader/Screens/Downloads.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -269,6 +270,11 @@ class _MainWidgetState extends State<MainWidget> {
             currentAccountPicture: Image.asset('assets/images/HeaderImg.png'), accountEmail: null,
           ),
           ListTile(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return Downloads();
+              }));
+            },
             leading:FaIcon(FontAwesomeIcons.download,size: 20,color: Colors.pink,),
             title: Text('DOWNLOADS', style: TextStyle(fontWeight: FontWeight.bold),),
           ),

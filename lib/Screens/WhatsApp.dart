@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:facebook_audience_network/ad/ad_native.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -25,7 +26,10 @@ class _WhatsAppState extends State<WhatsApp> with AutomaticKeepAliveClientMixin<
     // TODO: implement initState
     requestPermission();
     listFiles();
-
+    //FB ads
+    FacebookAudienceNetwork.init(
+      testingId: "d1aca6d9-5680-4699-b673-b62b621ce86d",
+    );
     super.initState();
   }
   requestPermission() async {
@@ -185,9 +189,12 @@ class WAVideoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 250.0,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
+          childAspectRatio: 1.0,
+        ),
       delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return Container(
@@ -220,7 +227,7 @@ class WAVideoWidget extends StatelessWidget {
                   child: Card(
                     color: Colors.transparent,
                     child: Center(
-                      child: FaIcon(FontAwesomeIcons.video,size: 30,color: Colors.pink,),
+                      child: FaIcon(FontAwesomeIcons.play,size: 30,color: Colors.pink,),
                     ),
                   ),
                 ),
@@ -252,8 +259,11 @@ class WAImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 250.0,
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 10.0,
+        childAspectRatio: 1.0,
       ),
       delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
