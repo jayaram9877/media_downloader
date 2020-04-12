@@ -161,25 +161,6 @@ void resetData(){
                   )
               ),
               ImageWidget(),
-              SliverSafeArea(
-                  sliver:SliverToBoxAdapter(
-                    child: FacebookNativeAd(
-                      placementId: "554511951874232_554517895206971",
-                      adType: NativeAdType.NATIVE_AD,
-                      width: double.infinity,
-                      height: 300,
-                      backgroundColor: Colors.blue,
-                      titleColor: Colors.white,
-                      descriptionColor: Colors.white,
-                      buttonColor: Colors.deepPurple,
-                      buttonTitleColor: Colors.white,
-                      buttonBorderColor: Colors.white,
-                      listener: (result, value) {
-                        print("Native Ad: $result --> $value");
-                      },
-                    ),
-                  )
-              ),
               VideoWidget(),
 
 
@@ -307,7 +288,6 @@ class _ImageWidgetState extends State<ImageWidget> {
                            child:
                              RaisedButton(color: Colors.black,
                                onPressed:(){
-                               _showInterstitialAd();
                                requestPermission();
                                Dio dio =new Dio();
                                var url=imgList[index].toString();
@@ -324,7 +304,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                                    imgDownloadBar[index]=double.parse(progress.toStringAsFixed(0))/100;
                                  });
                                });
-
+                               _showInterstitialAd();
                                print(imgList[index]);
                                },
                                  child: FaIcon(FontAwesomeIcons.download,size: 30,color: Colors.pink,),
@@ -432,7 +412,6 @@ class _VideoWidgetState extends State<VideoWidget> {
                                     child:
                                     RaisedButton(color: Colors.black,
                                       onPressed:(){
-                                      _showInterstitialAd();
                                       requestPermission();
                                         Dio dio =new Dio();
                                         var url=videoList[index].toString();
@@ -449,6 +428,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                                                 vidDownloadBar[index]=double.parse(progress.toStringAsFixed(0))/100;
                                               });
                                             });
+                                      _showInterstitialAd();
 
                                         print(videoList[index]);
                                       },
