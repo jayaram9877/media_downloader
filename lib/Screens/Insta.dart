@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:launcher_assist/launcher_assist.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shimmer/shimmer.dart';
@@ -76,7 +75,6 @@ void resetData(){
           FloatingActionButton(
               heroTag: null,
               onPressed: () {
-                LauncherAssist.launchApp('com.instagram.android');
               },
               materialTapTargetSize: MaterialTapTargetSize.padded,
               backgroundColor: Colors.pink,

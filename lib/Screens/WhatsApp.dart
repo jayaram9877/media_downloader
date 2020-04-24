@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:launcher_assist/launcher_assist.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
@@ -87,7 +86,6 @@ class _WhatsAppState extends State<WhatsApp> with AutomaticKeepAliveClientMixin<
       floatingActionButton: FloatingActionButton(
 child: FaIcon(FontAwesomeIcons.whatsapp,size: 30,color: Colors.white,),
         onPressed: () async{
-          LauncherAssist.launchApp('com.whatsapp');
 }
 
       ),
